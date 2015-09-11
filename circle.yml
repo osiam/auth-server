@@ -6,4 +6,4 @@ deployment:
  staging:
    branch: master
    commands:
-    - curl -v -X POST https://circleci.com/api/v1/project/osiam/connector4java-integration-tests/tree/master?circle-token=$CIRCLE_TOKEN
+    - curl -X POST https://circleci.com/api/v1/project/osiam/connector4java-integration-tests/tree/master?circle-token=$CIRCLE_TOKEN
