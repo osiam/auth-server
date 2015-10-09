@@ -1,6 +1,6 @@
 # OSIAM auth server
 
-## 2.3 - Unreleased
+## 2.3 - 2015-10-09
 
 ### Features
 
