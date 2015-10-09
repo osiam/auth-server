@@ -61,7 +61,7 @@
     <scm>
         <connection>scm:https://github.com/osiam/auth-server.git</connection>
         <developerConnection>scm:git:ssh://git@github.com/osiam/auth-server.git</developerConnection>
-        <tag>HEAD</tag>
+        <tag>maintenance-2.x</tag>
     </scm>
 
     <distributionManagement>
