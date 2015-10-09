@@ -23,8 +23,6 @@
 
 package org.osiam.auth.login;
 
-import javax.inject.Inject;
-
 import org.osiam.auth.oauth_client.OsiamAuthServerClientProvider;
 import org.osiam.auth.token.OsiamAccessTokenProvider;
 import org.osiam.client.OsiamConnector;
@@ -35,6 +33,8 @@ import org.osiam.resources.scim.UpdateUser;
 import org.osiam.resources.scim.User;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+
+import javax.inject.Inject;
 
 @Service
 public class ResourceServerConnector {
@@ -51,6 +51,13 @@ public class ResourceServerConnector {
     @Inject
     private OsiamAuthServerClientProvider authServerClientProvider;
 
+    static {
+        OsiamConnector.setMaxConnections(40);
+        OsiamConnector.setMaxConnectionsPerRoute(40);
+        OsiamConnector.setReadTimeout(10000);
+        OsiamConnector.setConnectTimeout(5000);
+    }
+
     public User getUserByUsername(final String userName) {
         OsiamConnector osiamConnector = createOsiamConnector();
         Query query = new QueryBuilder().filter("userName eq \"" + userName + "\"").build();
@@ -64,7 +71,7 @@ public class ResourceServerConnector {
             return result.getResources().get(0);
         }
     }
-    
+
     public User getUserById(final String id) {
         OsiamConnector osiamConnector = createOsiamConnector();
         return osiamConnector.getUser(id, osiamAccessTokenProvider.createAccessToken());

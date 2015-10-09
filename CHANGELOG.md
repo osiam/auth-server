@@ -6,6 +6,11 @@
 
 - JDBC connection pooling
 
+### Changes
+
+- Increase timeouts for connections to resource-server
+- Increase maximum number of parallel connections to resource-server
+
 ### Fixes
 
 - Make sure `access_token`, `refresh_token` and `token_type` are added only
