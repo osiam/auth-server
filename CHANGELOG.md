@@ -1,15 +1,28 @@
 # OSIAM auth server
 
-## Unreleased
+## 2.3 - Unreleased
+
+### Features
+
+- JDBC connection pooling
 
 ### Fixes
 
 - Make sure `access_token`, `refresh_token` and `token_type` are added only
   once to the returned Access Token (Fixes bug [#42]
   (https://github.com/osiam/auth-server/issues/42)).
-  
 - Remove `scopes` from the Access Token (Fixes bug [#51]
   (https://github.com/osiam/auth-server/issues/51)).
+- Prevent NPE when `User#active` is null
+
+### Updates
+
+- OSIAM connector4java 1.7
+- MySQL JDBC driver 5.1.36
+- PostgreSQL JDBC driver 9.4-1203
+- Spring 4.1.7.RELEASE
+- AspectJ 1.8.7
+- SLF4J LOG4J-12 Binding 1.7.12
 
 ## 2.2 - 2015-06-18
 
