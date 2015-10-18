@@ -20,9 +20,6 @@ org.osiam.auth-server.home=http://localhost:8080/osiam-auth-server
 
 # OSIAM resource server configuration
 org.osiam.resource-server.home=http://localhost:8080/osiam-resource-server
-# ATTENTION: you have to set a random secret for the resource server client!
-# It has to be the same as in the properties file of the resource server!
-org.osiam.resource-server.client.secret=secret
 
 # LDAP config for auth server
 org.osiam.auth-server.ldap.enabled=true
