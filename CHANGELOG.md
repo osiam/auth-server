@@ -5,6 +5,8 @@
 ### Features
 
 - JDBC connection pooling
+- Support retrieving list of clients
+- Make connector properties configurable
 
 ### Changes
 
