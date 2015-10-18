@@ -14,6 +14,10 @@ org.osiam.auth-server.db.url=jdbc:postgresql://localhost:5432/ong
 org.osiam.auth-server.db.username=ong
 org.osiam.auth-server.db.password=<YOUR_PASSWORD>
 
+# JDBC pool properties
+org.osiam.auth-server.db.maximum-pool-size=10
+org.osiam.auth-server.db.connection-timeout-ms=30000
+
 # OSIAM authentication-server configuration
 # Home URL (needed for self reference)
 org.osiam.auth-server.home=http://localhost:8080/osiam-auth-server

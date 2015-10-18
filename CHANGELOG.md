@@ -5,6 +5,7 @@
 ### Features
 
 - Make connector properties configurable
+- Make JDBC pool properties configurable
 
 ## 2.3 - 2015-10-09
 
