@@ -7,6 +7,7 @@
 - JDBC connection pooling
 - Support retrieving list of clients
 - Make connector properties configurable
+- Make JDBC pool properties configurable
 
 ### Changes
 
