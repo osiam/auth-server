@@ -18,8 +18,13 @@ org.osiam.auth-server.db.password=<YOUR_PASSWORD>
 # Home URL (needed for self reference)
 org.osiam.auth-server.home=http://localhost:8080/osiam-auth-server
 
-# OSIAM resource server configuration
+# OSIAM resource-server configuration
 org.osiam.resource-server.home=http://localhost:8080/osiam-resource-server
+# Maximum number of parallel connections to the resource-server
+org.osiam.resource-server.connector.max-connections=40
+# Timeouts of connections to resource-server in milliseconds
+org.osiam.resource-server.connector.read-timeout-ms=10000
+org.osiam.resource-server.connector.connect-timeout-ms=5000
 
 # LDAP config for auth server
 org.osiam.auth-server.ldap.enabled=true
