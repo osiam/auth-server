@@ -11,7 +11,6 @@
 ### Changes
 
 - Remove usage of old, method-based OAuth scopes
-- Remove support for old, method-based OAuth scopes
 - Add Flyway migration to replace method-based scopes
 
     The migration will remove all old, method-based scopes from all well-known

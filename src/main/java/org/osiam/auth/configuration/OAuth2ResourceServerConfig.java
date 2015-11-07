@@ -57,13 +57,13 @@ public class OAuth2ResourceServerConfig extends ResourceServerConfigurerAdapter 
                 .and()
                 .authorizeRequests()
                 .antMatchers("/Client/**")
-                .access("#oauth2.hasScope('ADMIN')")
+                .access("#osiam.hasScopeForHttpMethod() or #oauth2.hasScope('ADMIN')")
                 .antMatchers("/token/validation")
                 .authenticated()
                 .antMatchers("/token/revocation", "/token/revocation/")
-                .access("#oauth2.hasScope('ADMIN') or #oauth2.hasScope('ME')")
+                .access("#osiam.hasScopeForHttpMethod() or #oauth2.hasScope('ADMIN') or #oauth2.hasScope('ME')")
                 .antMatchers("/token/revocation/**")
-                .access("#oauth2.hasScope('ADMIN') or #oauth2.hasScope('ME') and #osiam.isOwnerOfResource()");
+                .access("#osiam.hasScopeForHttpMethod() or #oauth2.hasScope('ADMIN') or #oauth2.hasScope('ME') and #osiam.isOwnerOfResource()");
     }
 
     public OAuth2AuthenticationEntryPoint oauthAuthenticationEntryPoint() {
