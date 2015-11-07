@@ -17,8 +17,19 @@
     The migration will remove all old, method-based scopes from the auth-server
     client and add the scope `ADMIN`.
 
-- Increase timeouts for connections to resource-server
-- Increase maximum number of parallel connections to resource-server
+- Increase default timeouts for connections to resource-server
+- Increase default maximum number of parallel connections to resource-server
+- Switch to Spring Boot
+- Refactor database schema
+
+    **Note:** Some fields in table `osiam_client` have been renamed:
+
+    - `accesstokenvalidityseconds` becomes `access_token_validity_seconds`
+    - `refreshtokenvalidityseconds` becomes `refresh_token_validity_seconds`
+    - `validityinseconds` becomes `validity_in_seconds`
+
+    Update your SQL scripts, if you add OAuth 2 clients via direct database
+    manipulation.
 
 ### Fixes
 
@@ -28,17 +39,21 @@
 - Remove `scopes` from the Access Token (Fixes bug [#51]
   (https://github.com/osiam/auth-server/issues/51)).
 - Prevent NPE when `User#active` is null
+- Handle duplicate client creation error on application level
+
+    Respond with Conflict 409 when a client with a requested client id already
+    exists
 
 ### Updates
 
-- OSIAM connector4java 1.7
-- MySQL JDBC driver 5.1.36
-- PostgreSQL JDBC driver 9.4-1203
-- Spring 4.1.7.RELEASE
-- AspectJ 1.8.7
-- SLF4J LOG4J-12 Binding 1.7.12
+- OSIAM connector4java 1.8
+- MySQL JDBC driver 5.1.37
+- PostgreSQL JDBC driver 9.4-1205
+- OAuth2 for Spring Security 2.0.8
 
 ## 2.3 - 2015-10-09
+
+Revoked, see 2.5
 
 ## 2.2 - 2015-06-18
 
