@@ -1,8 +1,12 @@
 # OSIAM auth server
 
-## 3.0 - Unreleased
+## 2.5 - Unreleased
 
 **Potentially breaking changes!**
+
+### Features
+
+- JDBC connection pooling
 
 ### Changes
 
@@ -13,14 +17,6 @@
     The migration will remove all old, method-based scopes from all well-known
     clients and then add the new scopes `ADMIN` and `ME`. See the
     [migration notes] (docs/Migration.md#from-22-to-30) for further details.
-
-## 2.3 - 2015-10-09
-
-### Features
-
-- JDBC connection pooling
-
-### Changes
 
 - Increase timeouts for connections to resource-server
 - Increase maximum number of parallel connections to resource-server
@@ -42,6 +38,8 @@
 - Spring 4.1.7.RELEASE
 - AspectJ 1.8.7
 - SLF4J LOG4J-12 Binding 1.7.12
+
+## 2.3 - 2015-10-09
 
 ## 2.2 - 2015-06-18
 
