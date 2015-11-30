@@ -10,6 +10,6 @@ deployment:
    branch: master
    commands:
     # de-activated as we don't build the artifacts on CircleCI, yet. Re-activate this when we do.
-    #- curl -X POST https://circleci.com/api/v1/project/osiam/connector4java-integration-tests/tree/master?circle-token=$CIRCLE_TOKEN
+    #- curl -X POST https://circleci.com/api/v1/project/osiam/connector4java-integration-tests/tree/maintenance-2.x?circle-token=$CIRCLE_TOKEN
     - >
-        curl -H "Content-Type: application/json" --data '{"source_type": "Branch", "source_name": "master"}' -X POST https://registry.hub.docker.com/u/osiamorg/osiam/trigger/${DOCKER_HUB_TRIGGER_TOKEN}/
+        curl -H "Content-Type: application/json" --data '{"source_type": "Branch", "source_name": "maintenance-2.x"}' -X POST https://registry.hub.docker.com/u/osiamorg/osiam/trigger/${DOCKER_HUB_TRIGGER_TOKEN}/

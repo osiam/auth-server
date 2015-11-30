@@ -32,11 +32,12 @@ import org.osiam.resources.scim.SCIMSearchResult;
 import org.osiam.resources.scim.UpdateUser;
 import org.osiam.resources.scim.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ResourceServerConnector {
+public class ResourceServerConnector implements InitializingBean{
 
     @Value("${org.osiam.resource-server.home}")
     private String resourceServerHome;
@@ -44,15 +45,25 @@ public class ResourceServerConnector {
     @Value("${org.osiam.auth-server.home}")
     private String authServerHome;
 
+    @Value("${org.osiam.resource-server.connector.max-connections:40}")
+    private int maxConnections;
+
+    @Value("${org.osiam.resource-server.connector.read-timeout-ms:10000}")
+    private int readTimeout;
+
+    @Value("${org.osiam.resource-server.connector.connect-timeout-ms:5000}")
+    private int connectTimeout;
+
     @Autowired
     private OsiamAccessTokenProvider osiamAccessTokenProvider;
 
     @Autowired
     private OsiamAuthServerClientProvider authServerClientProvider;
 
-    static {
-        OsiamConnector.setMaxConnections(40);
-        OsiamConnector.setMaxConnectionsPerRoute(40);
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        OsiamConnector.setMaxConnections(maxConnections);
+        OsiamConnector.setMaxConnectionsPerRoute(maxConnections);
     }
 
     public User getUserByUsername(final String userName) {
@@ -101,8 +112,8 @@ public class ResourceServerConnector {
                 .setResourceServerEndpoint(resourceServerHome)
                 .setClientId(OsiamAuthServerClientProvider.AUTH_SERVER_CLIENT_ID)
                 .setClientSecret(authServerClientProvider.getClientSecret())
-                .withReadTimeout(10000)
-                .withConnectTimeout(5000)
+                .withReadTimeout(readTimeout)
+                .withConnectTimeout(connectTimeout)
                 .build();
     }
 }

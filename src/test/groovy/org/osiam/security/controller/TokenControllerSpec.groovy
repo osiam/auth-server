@@ -52,7 +52,7 @@ class TokenControllerSpec extends Specification {
         given:
         OAuth2Authentication auth = Mock(OAuth2Authentication)
         OAuth2AccessToken accessToken = Mock(OAuth2AccessToken)
-        OAuth2Request authReq = new OAuth2Request(null, 'clientId', null, true, ['GET'] as Set, null, null, null, null)
+        OAuth2Request authReq = new OAuth2Request(null, 'clientId', null, true, ['ADMIN'] as Set, null, null, null, null)
         Authentication authentication = Mock(Authentication)
         User user = new User.Builder('username').setId('userId').build()
         Date date = new Date()
@@ -71,7 +71,7 @@ class TokenControllerSpec extends Specification {
         result.clientId == 'clientId'
         result.userId == 'userId'
         result.userName == 'username'
-        result.scopes.contains(new Scope('GET'))
+        result.scopes.contains(Scope.ADMIN)
         result.expiresAt == date
     }
 

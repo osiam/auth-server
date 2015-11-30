@@ -23,15 +23,15 @@
 
 package db.migration;
 
+import org.flywaydb.core.api.migration.MigrationChecksumProvider;
+import org.flywaydb.core.api.migration.jdbc.JdbcMigration;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
-
-import org.flywaydb.core.api.migration.MigrationChecksumProvider;
-import org.flywaydb.core.api.migration.jdbc.JdbcMigration;
 
 public class V4__replace_old_scopes implements JdbcMigration, MigrationChecksumProvider {
 
@@ -46,14 +46,8 @@ public class V4__replace_old_scopes implements JdbcMigration, MigrationChecksumP
     @Override
     public void migrate(Connection connection) throws Exception {
         this.connection = connection;
-        removeScopesFromClient("example-client", "GET", "POST", "PUT", "PATCH", "DELETE");
-        addScopesToClient("example-client", "ADMIN", "ME");
         removeScopesFromClient("auth-server", "GET", "POST", "PUT", "PATCH", "DELETE");
         addScopesToClient("auth-server", "ADMIN");
-        removeScopesFromClient("addon-self-administration-client", "GET", "POST", "PUT", "PATCH", "DELETE");
-        addScopesToClient("addon-self-administration-client", "ADMIN");
-        removeScopesFromClient("addon-administration-client", "GET", "POST", "PUT", "PATCH", "DELETE");
-        addScopesToClient("addon-administration-client", "ADMIN");
     }
 
     private void removeScopesFromClient(String clientId, String... scopes) throws SQLException {

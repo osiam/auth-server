@@ -70,6 +70,12 @@ public class AuthServer extends SpringBootServletInitializer {
     @Value("${org.osiam.auth-server.db.vendor}")
     private String databaseVendor;
 
+    @Value("${org.osiam.auth-server.db.maximum-pool-size:10}")
+    private int maximumPoolSize;
+
+    @Value("${org.osiam.auth-server.db.connection-timeout-ms:30000}")
+    private int connectionTimeoutMs;
+
     public static void main(String[] args) {
         SpringApplication application = new SpringApplication(AuthServer.class);
         application.setDefaultProperties(DEFAULT_PROPERTIES);
@@ -99,6 +105,8 @@ public class AuthServer extends SpringBootServletInitializer {
         hikariConfig.setJdbcUrl(databaseUrl);
         hikariConfig.setUsername(databaseUserName);
         hikariConfig.setPassword(databasePassword);
+        hikariConfig.setMaximumPoolSize(maximumPoolSize);
+        hikariConfig.setConnectionTimeout(connectionTimeoutMs);
         return new HikariDataSource(hikariConfig);
     }
 

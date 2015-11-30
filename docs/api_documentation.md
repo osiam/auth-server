@@ -207,6 +207,15 @@ OSIAM knows about the following scopes:
 * ME - allows read and write access to the data of the user associated with the
   access token
 
+The following, deprecated scopes map to the respective HTTP methods and will be
+removed in OSIAM 3.0:
+
+* GET - allows you all get calls it stands for reading
+* POST - allows you all post calls it stands mostly for creating
+* PUT - allows you all put calls it stands for replacing
+* PATCH - allows you all patch calls which means updating
+* DELETE - allows you all delete calls which means deleting
+
 ## Client Management
 
 The client management is a osiam defined endpoint to manage the clients needed

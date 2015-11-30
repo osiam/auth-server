@@ -3,11 +3,13 @@ package org.osiam.security.authorization;
 import com.google.common.base.Splitter;
 import org.osiam.resources.scim.User;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.oauth2.provider.expression.OAuth2ExpressionUtils;
 import org.springframework.security.web.FilterInvocation;
 
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
+import java.util.Locale;
 
 public class OsiamSecurityExpressionMethods {
 
@@ -17,6 +19,14 @@ public class OsiamSecurityExpressionMethods {
     public OsiamSecurityExpressionMethods(Authentication authentication, FilterInvocation filterInvocation) {
         this.authentication = authentication;
         this.filterInvocation = filterInvocation;
+    }
+
+    public boolean hasScopeForHttpMethod() {
+        return OAuth2ExpressionUtils.hasAnyScope(authentication, new String[]{getHttpMethod()});
+    }
+
+    private String getHttpMethod() {
+        return filterInvocation.getRequest().getMethod().toUpperCase(Locale.ENGLISH);
     }
 
     public boolean isOwnerOfResource() {

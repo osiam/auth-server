@@ -14,15 +14,21 @@ org.osiam.auth-server.db.url=jdbc:postgresql://localhost:5432/ong
 org.osiam.auth-server.db.username=ong
 org.osiam.auth-server.db.password=<YOUR_PASSWORD>
 
+# JDBC pool properties
+org.osiam.auth-server.db.maximum-pool-size=10
+org.osiam.auth-server.db.connection-timeout-ms=30000
+
 # OSIAM authentication-server configuration
 # Home URL (needed for self reference)
 org.osiam.auth-server.home=http://localhost:8080/osiam-auth-server
 
-# OSIAM resource server configuration
+# OSIAM resource-server configuration
 org.osiam.resource-server.home=http://localhost:8080/osiam-resource-server
-# ATTENTION: you have to set a random secret for the resource server client!
-# It has to be the same as in the properties file of the resource server!
-org.osiam.resource-server.client.secret=secret
+# Maximum number of parallel connections to the resource-server
+org.osiam.resource-server.connector.max-connections=40
+# Timeouts of connections to resource-server in milliseconds
+org.osiam.resource-server.connector.read-timeout-ms=10000
+org.osiam.resource-server.connector.connect-timeout-ms=5000
 
 # LDAP config for auth server
 org.osiam.auth-server.ldap.enabled=true
