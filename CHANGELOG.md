@@ -1,25 +1,51 @@
 # OSIAM auth server
 
-## 2.5 - Unreleased
+## 2.5 - 2015-12-15
 
 ### Features
 
-- JDBC connection pooling
+- Use JDBC connection pooling
+
+    By default the pool has a size of 10 and a timeout of 30s to acquire a connection.
+    These settings can be changed with the following configuration properties:
+
+    - `org.osiam.auth-server.db.maximum-pool-size`
+    - `org.osiam.auth-server.db.connection-timeout-ms`
+
 - Support retrieving list of clients
-- Make connector properties configurable
-- Make JDBC pool properties configurable
+
+    Use the resource endpoint `/Client` with `GET`.
+
+- Make number of parallel connections to the auth-server configurable
+
+    The default is 40 and can be changed with the following configuration property:
+
+    - `org.osiam.resource-server.connector.max-connections`
+
+- Make timeouts of connections to auth-server configurable
+
+    By default the read timeout is set to 10000ms and the connect timeout to 5000ms.
+    These settings can be changed with the following configuration properties:
+
+    - `org.osiam.resource-server.connector.read-timeout-ms`
+    - `org.osiam.resource-server.connector.connect-timeout-ms`
 
 ### Changes
 
-- Remove usage of old, method-based OAuth scopes
 - Add Flyway migration to replace method-based scopes
 
-    The migration will remove all old, method-based scopes from the auth-server
-    client and add the scope `ADMIN`.
+    The migration removes all method-based scopes from the auth-server client and adds the scope `ADMIN`.
 
 - Increase default timeouts for connections to resource-server
+
+    By default the read timeout is set to 10000ms and the connect timeout to 5000ms.
+
 - Increase default maximum number of parallel connections to resource-server
+
+    The default is 40.
+
 - Switch to Spring Boot
+
 - Refactor database schema
 
     **Note:** Some fields in table `osiam_client` have been renamed:
@@ -28,17 +54,18 @@
     - `refreshtokenvalidityseconds` becomes `refresh_token_validity_seconds`
     - `validityinseconds` becomes `validity_in_seconds`
 
-    Update your SQL scripts, if you add OAuth 2 clients via direct database
-    manipulation.
+    Update your SQL scripts, if you add OAuth 2 clients via direct database manipulation.
+    It's recommended to use the RESTful endpoints under `/Client` to manage Clients.
 
 ### Fixes
 
 - Make sure `access_token`, `refresh_token` and `token_type` are added only
-  once to the returned Access Token (Fixes bug [#42]
-  (https://github.com/osiam/auth-server/issues/42)).
-- Remove `scopes` from the Access Token (Fixes bug [#51]
-  (https://github.com/osiam/auth-server/issues/51)).
+  once to the returned Access Token (Fixes [#42](https://github.com/osiam/auth-server/issues/42)).
+
+- Remove `scopes` from the Access Token (Fixes [#51](https://github.com/osiam/auth-server/issues/51)).
+
 - Prevent NPE when `User#active` is null
+
 - Handle duplicate client creation error on application level
 
     Respond with Conflict 409 when a client with a requested client id already
@@ -50,6 +77,10 @@
 - MySQL JDBC driver 5.1.37
 - PostgreSQL JDBC driver 9.4-1205
 - OAuth2 for Spring Security 2.0.8
+
+## 2.4
+
+Skipped to synchronize OSIAM main version with versions of the core servers
 
 ## 2.3 - 2015-10-09
 
